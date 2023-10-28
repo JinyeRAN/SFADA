@@ -1,0 +1,43 @@
+DATASET:
+  ROOT: './data'
+  NAME: 'EyeAdaptation'
+  SOURCE_DOMAINS: ['cfp']
+  TARGET_DOMAINS: ['uwf']
+  NUM_CLASS: 5
+  CROP_SIZE: 224
+  RESIZE_SIZE: 256
+
+DATALOADER:
+  BATCH_SIZE: 32
+
+OPTIM:
+  NAME: 'Adadelta'
+  SOURCE_LR: 0.1
+  BASE_LR_MULT: 0.1
+
+TRAINER:
+  MAX_EPOCHS: 15
+  TRAIN_ON_SOURCE : True
+  MAX_SOURCE_EPOCHS: 100
+  SOURCE_MODE: 'ce+cl'
+  RESUME: None
+  EVAL_ACC : False
+  SOURCEFREE : True
+  GENERATOR_TYPE :  'ce+cl'
+
+MODEL:
+  BACKBONE:
+    NAME: 'SwinFormFc'
+  BOTTEN_NECK: 256
+
+ADA:
+  DA : 'LPDA'
+  AL : 'ALRM'
+  ROUNDS : [0,2,4,6,8]
+
+LPDA:
+  S_K : 5
+  A_TH: 0.8
+  S_TH: 0.9
+
+SEED: 1
