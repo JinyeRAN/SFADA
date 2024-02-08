@@ -52,6 +52,10 @@ class SamplingStrategy:
         self.solver = None
         self.lr_scheduler = None
 
+        self.opt_net_tgt = utils.get_optim(self.cfg.OPTIM.NAME,
+            self.model.parameters_network(self.cfg.OPTIM.ADAPT_LR, self.cfg.OPTIM.BASE_LR_MULT, ),
+            lr=self.cfg.OPTIM.ADAPT_LR,weight_decay=0.00001)
+
         self.query_dset = tgt_dset.get_dsets()[1] # change to query dataset
 
         self.src_prototype = Prototype(self.cfg.DATASET.NUM_CLASS, self.cfg.MODEL.BOTTEN_NECK, self.device)
